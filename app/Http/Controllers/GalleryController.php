@@ -74,7 +74,7 @@ class GalleryController extends Controller
 
     $galeri->save();
 
-    return redirect()->route('galleries.index')->with('success', 'Data updated successfully!');
+    return redirect()->route('galeris.index')->with('success', 'Data updated successfully!');
 }
 
     public function destroy(Galeri $galeri)
