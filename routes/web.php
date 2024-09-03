@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ArtikelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -33,5 +35,18 @@ Route::post('register/action', [RegisterController::class, 'actionregister'])->n
 
 Route::resource('artikels', ArtikelController::class);
 Route::get('artikels/{id}', [ArtikelController::class, 'show'])->name('artikels.show');
+
+
+
+Route::resource('galeris', GalleryController::class);
+
+// Route untuk menampilkan halaman edit
+Route::get('/galeris/{id}/edit', [GalleryController::class, 'edit'])->name('edit');
+
+// Route untuk menangani pembaruan data
+Route::put('/galeris/{id}/update', [GalleryController::class, 'update'])->name('update');
+
+//route kembali dari halaman update
+Route::get('/', [GalleryController::class, 'index'])->name('home');
 
 
