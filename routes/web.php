@@ -3,11 +3,14 @@
 
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\FeatureController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LayerController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MapController;
 
 
 Route::get('/', [LoginController::class, 'login'])->name('login');
@@ -50,3 +53,25 @@ Route::get('/cobaview', function () {
 });
 
 
+//map
+// Route::prefix('map')->group(function () {
+//     Route::get('/', [MapController::class, 'index'])->name('map.index');
+//     Route::get('/edit/{id}', [MapController::class, 'edit'])->name('map.edit');
+//     Route::get('/update/{id}', [MapController::class, 'update'])->name('map.update');
+// });
+Route::resource('map', MapController::class);
+Route::get('/map/data/json', [MapController::class, 'getData'])->name('layer.json');
+// Route::prefix('layer')->group(function () {
+//     Route::get('/', [LayerController::class, 'index'])->name('layer.index');
+//     Route::get('/create', [LayerController::class, 'create'])->name('layer.create');
+//     Route::get('/store', [LayerController::class, 'store'])->name('layer.store');
+//     Route::get('/edit/{id}', [LayerController::class, 'edit'])->name('layer.edit');
+//     Route::get('/update/{id}', [LayerController::class, 'update'])->name('layer.update');
+// });
+// layer
+Route::resource('layer', LayerController::class);
+Route::get('/layer/data/json', [LayerController::class, 'getData'])->name('layer.json');
+// feature
+Route::resource('feature', FeatureController::class);
+Route::get('/layers/features', [FeatureController::class, 'getFeaturesByLayer'])->name('features.byLayer');
+Route::get('/layers/{id}/features/show', [FeatureController::class, 'showFeaturesByLayer'])->name('showfeatures.byLayer');
